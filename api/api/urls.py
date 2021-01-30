@@ -20,7 +20,7 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'co2', views.CO2ViewSet)
+router.register(r'emissions', views.EmissionsViewSet)
 
 
 urlpatterns = [
