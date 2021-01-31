@@ -8,12 +8,15 @@ import tree from './assets/tree.png';
 import sprout from './assets/sprout.png';
 import moon from './assets/moon.png';
 import star from './assets/star.png';
+import humanSkull from './assets/skull.png';
+import HeatMap from './components/HeatMapDataViz';
+import BubbleViz from './components/BubbleDataViz';
+
 import EmissionForm from './views/EmissionForm.js'
 
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
 function App() {
-
 	return (
 		<div className="App">
 			 <Parallax pages={3} scrolling={true} vertical ref={ref => (React.parallax = ref)}>
