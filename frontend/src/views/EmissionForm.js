@@ -2,9 +2,6 @@ import React from "react";
 import { TextField, Select, MenuItem, FormControl, FormHelperText, Button  } from '@material-ui/core';
 import axios from 'axios';
 
-const user_longitude='';
-const user_latitude='';
-
 const formState = {
     name: '',
     time: '',
@@ -15,24 +12,25 @@ const formState = {
     electricity: '',
     air : '',
     rail: '',
-    latitude: '',
+    vehicle: '',
+    lattitude: '',
     longitude: '',
 }
 
 const gasOptions = [
-  {key: "NGS", text: "Natural Gas",value: "NGS"},
-  {key: "OIL",text: "Oil",value: "OIL"},
-  {key: "OTH",text: "Other",value: "OTH"},
+{key: "NGS", text: "Natural Gas",value: "NGS"},
+{key: "OIL",text: "Oil",value: "OIL"},
+{key: "OTH",text: "Other",value: "OTH"},
 ];
 
 const vehicleOptions = [
-  {key: "D", text: "Diesel",value: "D"},
-  {key: "G",text: "Gas",value: "G"}
+{key: "D", text: "Diesel",value: "D"},
+{key: "G",text: "Gas",value: "G"}
 ];
 
 const companyOptions = [
-  {key: "R", text: "Residential",value: "R"},
-  {key: "C",text: "Commercial",value: "C"},
+{key: "R", text: "Residential",value: "R"},
+{key: "C",text: "Commercial",value: "C"},
 ];
 
 const PaperStyle = {
@@ -54,24 +52,41 @@ class EmissionForm extends React.Component {
 
     getLocation(position){
         const obj = formState;
-        obj['longitude'] = position.coords.latitude;
-        obj['latitude'] = position.coords.longitude;
+        obj['longitude'] = position.coords.longitude;
+        obj['lattitude'] = position.coords.latitude;
+    }
+
+    async postData(url = '', data = {}){
+        const response = await fetch(
+            url,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data,
+            })
+        return response.json();
     }
 
     handleSubmit(event) {
         var obj = this.state;
+        console.log(obj);
         var d = new Date();
         var n = d.getTime();
         obj['time'] = n;
         obj = JSON.stringify(obj);
-        axios.post('localhost:8000/emissions/', { obj })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+        console.log(obj);
+        const url = 'http://localhost:8000/emissions/';
+        this.postData(url, obj)
+        .then(data => {
+            console.log(data);
+        }
+        )
     }
 
     handleSelectChange(event, key){
+        console.log(this.state)
         const UpdateKey = key;
         var obj = this.state;
         obj[UpdateKey] = event.target.value;
@@ -81,113 +96,123 @@ class EmissionForm extends React.Component {
 
     componentDidMount(){
         const result = navigator.geolocation.getCurrentPosition(this.getLocation);
+        console.log(this.state)
     }
 
     render(){
         return (
-        <div>
-           <div style={PaperStyle}>
+            <div>
+            <div style={PaperStyle}>
             <TextField 
-                style = {InputStyle}
-                required
-                id="standard-required"
-                label="Name"
-                placeholder="Please Enter your name..."
-                onChange={(e) => this.handleSelectChange(e, "name")}
-                />
-           </div>
-           <div style={PaperStyle}>
-               <FormControl>
-               <Select
-                  value={this.state.user_type}
-                  onChange={(e) => this.handleSelectChange(e, "user_type")}
-                  autoWidth
-                >
-                {
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Name"
+            placeholder="Please Enter your name..."
+            onChange={(e) => this.handleSelectChange(e, "name")}
+            />
+            </div>
+            <div style={PaperStyle}>
+            <FormControl>
+            <Select
+            value={this.state.user_type}
+            onChange={(e) => this.handleSelectChange(e, "user_type")}
+            autoWidth
+            >
+            {
                 companyOptions.map((option) =>
-                     <MenuItem name={'user_type'} value={option.value}>{option.text}</MenuItem>
-                )
-                }
-                </Select>
-                <FormHelperText style={{margin: "auto"}}>Are you filling this information for yourself or a Company?</FormHelperText>
-                </FormControl>
+                 <MenuItem name={'user_type'} value={option.value}>{option.text}</MenuItem>
+                 )
+            }
+            </Select>
+            <FormHelperText style={{margin: "auto"}}>Are you filling this information for yourself or a Company?</FormHelperText>
+            </FormControl>
             </div>
             <div style={PaperStyle}>
-               <FormControl>
-                   <Select
-                      value={this.state.heat_type}
-                      onChange={(e) => this.handleSelectChange(e, "heat_type")}
-                      autoWidth
-                    >
-                    {
-                    gasOptions.map((option) =>
-                         <MenuItem value={option.value}>{option.text}</MenuItem>
-                    )
-                    }
-                    </Select>
-                    <FormHelperText style={{margin: "auto"}}>What is your primary fuel type?</FormHelperText>
-                </FormControl>
+            <FormControl>
+            <Select
+            value={this.state.heat_type}
+            onChange={(e) => this.handleSelectChange(e, "heat_type")}
+            autoWidth
+            >
+            {
+                gasOptions.map((option) =>
+                 <MenuItem value={option.value}>{option.text}</MenuItem>
+                 )
+            }
+            </Select>
+            <FormHelperText style={{margin: "auto"}}>What is your primary fuel type?</FormHelperText>
+            </FormControl>
             </div>
             <div style={PaperStyle}>
-                <TextField
-                    style = {InputStyle}
-                    required
-                    id="standard-required"
-                    label="Heat (in Cubic/Ft)"
-                    placeholder="Please Provide Amount of Heat Consumed" 
-                    onChange={(e) => this.handleSelectChange(e, "heat")}/>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Heat (in Cubic/Ft)"
+            placeholder="Please Provide Amount of Heat Consumed" 
+            onChange={(e) => this.handleSelectChange(e, "heat")}/>
             </div>
             <div style={PaperStyle}>
-                <TextField
-                    style = {InputStyle}
-                    required
-                    id="standard-required"
-                    label="Electricity (in KWH)"
-                    placeholder="Please Provide Amount of Electricity used in KWH" 
-                    onChange={(e) => this.handleSelectChange(e, "electricity")}/>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Electricity (in KWH)"
+            placeholder="Please Provide Amount of Electricity used in KWH" 
+            onChange={(e) => this.handleSelectChange(e, "electricity")}/>
             </div>
-             <div style={PaperStyle}>
-               <FormControl>
-               <Select
-                  value={this.state.vehicle_type}
-                  onChange={(e) => this.handleSelectChange(e, "vehicle_type")}
-                  autoWidth
-                >
-                {
+            <div style={PaperStyle}>
+            <FormControl>
+            <Select
+            value={this.state.vehicle_type}
+            onChange={(e) => this.handleSelectChange(e, "vehicle_type")}
+            autoWidth
+            >
+            {
                 vehicleOptions.map((option) =>
-                     <MenuItem value={option.value}>{option.text}</MenuItem>
-                )
-                }
-                </Select>
-                <FormHelperText style={{margin: "auto"}}>Do you primarily use 
-                Deasel or Gas?</FormHelperText>
-                </FormControl>
+                 <MenuItem value={option.value}>{option.text}</MenuItem>
+                 )
+            }
+            </Select>
+            <FormHelperText style={{margin: "auto"}}>Do you primarily use 
+            Deasel or Gas?</FormHelperText>
+            </FormControl>
             </div>
             <div style={PaperStyle}>
-                <TextField
-                    style = {InputStyle}
-                    required
-                    id="standard-required"
-                    label="Air Travel (Miles/Year)"
-                    placeholder="Please Provide Amount of Heat Consumed" 
-                    onChange={(e) => this.handleSelectChange(e, "air")}/>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Vehicle Travel (Miles/Year)"
+            placeholder="Please Provide Amount of Miles Traveled" 
+            onChange={(e) => this.handleSelectChange(e, "vehicle")}/>
             </div>
             <div style={PaperStyle}>
-                <TextField
-                    style = {InputStyle}
-                    required
-                    id="standard-required"
-                    label="Rail Travel (Miles/Year)"
-                    placeholder="Please Provide Amount of Heat Consumed" 
-                    onChange={(e) => this.handleSelectChange(e, "rail")}/>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Air Travel (Miles/Year)"
+            placeholder="Please Provide Amount of Miles Traveled" 
+            onChange={(e) => this.handleSelectChange(e, "air")}/>
+            </div>
+            <div style={PaperStyle}>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Rail Travel (Miles/Year)"
+            placeholder="Please Provide Amount of Miles Traveled" 
+            onChange={(e) => this.handleSelectChange(e, "rail")}/>
             </div>
             <Button 
-                size="large"
-                onClick={(e) => this.handleSubmit(e)}>
-              Submit
+            size="large"
+            onClick={(e) => this.handleSubmit(e)}>
+            Submit
             </Button>
-        </div>
-        )
+            </div>
+            )
     }
 }
 
