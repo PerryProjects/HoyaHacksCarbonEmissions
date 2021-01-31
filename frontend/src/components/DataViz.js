@@ -41,8 +41,9 @@ class DataViz extends React.Component {
         super(props);
         this.state = {};
     };
-    ComponentDidMount() {
-      //fetch
+    componentDidMount() {
+      fetch('http://localhost:8000/emissions/')
+        .then(data => console.log(data));
       // for i in
       //  this.state.data[0]['key'] = 'value'
     };
