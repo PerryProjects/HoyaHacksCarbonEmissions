@@ -8,17 +8,24 @@ import tree from './assets/tree.png';
 import sprout from './assets/sprout.png';
 import moon from './assets/moon.png';
 import star from './assets/star.png';
+import BubbleDataViz from './components/BubbleDataViz.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory
+} from "react-router-dom"
+
 import humanSkull from './assets/skull.png';
 import HeatMap from './components/HeatMapDataViz';
 import BubbleViz from './components/BubbleDataViz';
 
-import EmissionForm from './views/EmissionForm.js'
-
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
-function App() {
-	return (
-		<div className="App">
+function InnerApp(props) {
+  return (
+    <div className="App">
 			 <Parallax pages={3} scrolling={true} vertical ref={ref => (React.parallax = ref)}>
 				<ParallaxLayer offset={0} speed={0.4} factor={1.5} style={{ backgroundColor: '#253237', backgroundSize: 'cover' }}>
 					<img src={BannerPic} style = {{width: '20%', marginTop: '-5%', marginLeft: '85%'}} />
@@ -77,11 +84,33 @@ function App() {
 					<img src={plane} style={{ display: 'block', width: '10%', marginLeft: '55%', marginTop: '10%' }} />
 				</ParallaxLayer>
 				<ParallaxLayer offset={0.5} factor = {1.5} speed={0.6} style={{ opacity: 0.98 }}>
+
 					<EmissionForm />
+
 				</ParallaxLayer>
 				<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 			</Parallax>
 		</div>
+  )
+}
+
+function App() {
+
+	return (
+    <Router>
+
+      <Switch>
+        <Route path="/" exact={true}>
+          <InnerApp />
+        </Route>
+
+        <Route path="/bubble">
+          <BubbleDataViz/>
+        </Route>
+
+      </Switch>
+
+    </Router>
 	);
 }
 
