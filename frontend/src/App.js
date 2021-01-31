@@ -8,6 +8,8 @@ import tree from './assets/tree.png';
 import sprout from './assets/sprout.png';
 import moon from './assets/moon.png';
 import star from './assets/star.png';
+import dino from './assets/dinosaur-skull.png';
+import fish from './assets/fish-bone.png';
 import BubbleDataViz from './components/BubbleDataViz.js';
 import EmissionForm from './views/EmissionForm.js';
 import {
@@ -64,6 +66,7 @@ function InnerApp(props) {
 				<ParallaxLayer offset={2} speed={0.1} factor={3} style={{ backgroundColor: '#2D6A4F' }} />
 				<ParallaxLayer offset={2.3} speed={0.1} factor={1} style={{ background: 'linear-gradient(180deg, #2D6A4F 0%, #7c5e42 50%)' }} />
 				
+				
 				<ParallaxLayer offset={1.7} speed={0.3} style={{ opacity: 1 }}>
 					<img src={tree} style={{ display: 'block', width: '18%', height: '54%', marginLeft: '20%', marginTop: '3%'}}/>
 					<img src={tree} style={{ display: 'block', width: '21%', height: '60%', marginLeft: '-2%', marginTop: '-28%' }}/>
@@ -86,10 +89,16 @@ function InnerApp(props) {
 				</ParallaxLayer>
 				<ParallaxLayer offset={0.5} factor = {1.5} speed={0.6} style={{ opacity: 0.98 }}>
 
-					<EmissionForm />
+				<EmissionForm />
 
 				</ParallaxLayer>
+				<ParallaxLayer offset={2.3} speed={0.1} factor={1}>
+					<img src={fish} style={{ display: 'block', width: '10%', marginLeft: '55%', marginTop: '10%' }} /> 
+					<img src={dino} style={{ display: 'block', width: '10%', marginLeft: '30%' }} />
+				</ParallaxLayer>
+
 				<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+				
 			</Parallax>
 		</div>
   )
