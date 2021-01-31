@@ -55,11 +55,9 @@ class Emission (models.Model):
     electricity = models.FloatField()
     air = models.FloatField()
     rail = models.FloatField()
+    emissions_total = models.FloatField(null=True)
 
-    # Model methods
-    @property
-    def emissions_total(self):
-        
+    def save(self, *args, **kwargs):
         # Init data
         total_heat = 0
         total_vehicle = 0
@@ -87,4 +85,8 @@ class Emission (models.Model):
 
         total_rail = (self.rail/1000) * .114
 
-        return total_heat + total_vehicle + + total_electricity + total_air + total_rail
+        self.emissions_total = total_heat + total_vehicle + + total_electricity + total_air + total_rail
+
+        super(Emission, self).save(*args, **kwargs)
+        
+        
