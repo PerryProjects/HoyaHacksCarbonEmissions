@@ -1,0 +1,11 @@
+::placeholder {
+    color: rgb(68, 68, 71) !important;
+    opacity: 1;
+  }
+  /* .react-select__placeholder {
+    color: black !important;
+  } */
+  .ui.default.dropdown:not(.button) > .text,
+  .ui.dropdown:not(.button) > .default.text {
+    color: rgb(44, 44, 49);
+  }
