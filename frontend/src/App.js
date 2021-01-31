@@ -9,6 +9,7 @@ import sprout from './assets/sprout.png';
 import moon from './assets/moon.png';
 import star from './assets/star.png';
 import BubbleDataViz from './components/BubbleDataViz.js';
+import EmissionForm from './views/EmissionForm.js';
 import {
   BrowserRouter as Router,
   Switch,
