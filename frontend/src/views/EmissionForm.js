@@ -1,6 +1,16 @@
 import React from "react";
 import { TextField, Select, MenuItem, FormControl, FormHelperText, Button  } from '@material-ui/core';
 import axios from 'axios';
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import PowerRoundedIcon from '@material-ui/icons/PowerRounded';
+import FlightTakeoffRoundedIcon from '@material-ui/icons/FlightTakeoffRounded';
+import TrainRoundedIcon from '@material-ui/icons/TrainRounded';
+import WhatshotRoundedIcon from '@material-ui/icons/WhatshotRounded';
+import LocalShippingRoundedIcon from '@material-ui/icons/LocalShippingRounded';
+import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
+
 
 const formState = {
     name: '',
@@ -34,14 +44,18 @@ const companyOptions = [
 ];
 
 const PaperStyle = {
-    background: "#47afb3",
-    width: "30%",
+    background: "#4CC9F0",
+    borderRadius: "1em",
+    padding: ".2em",
+    opacity: ".85",
+    width: "50%",
     fontSize: "300%",
+    fontWeight: "bold",
     margin: "auto"
 }
 
 const InputStyle = {
-    width: "60%",
+    width: "90%",
 };
 
 class EmissionForm extends React.Component {
@@ -80,13 +94,13 @@ class EmissionForm extends React.Component {
         const url = 'http://localhost:8000/emissions/';
         this.postData(url, obj)
         .then(data => {
+            //TODO: Route them to the emissions page
             console.log(data);
         }
         )
     }
 
     handleSelectChange(event, key){
-        console.log(this.state)
         const UpdateKey = key;
         var obj = this.state;
         obj[UpdateKey] = event.target.value;
@@ -96,12 +110,16 @@ class EmissionForm extends React.Component {
 
     componentDidMount(){
         const result = navigator.geolocation.getCurrentPosition(this.getLocation);
-        console.log(this.state)
     }
 
     render(){
         return (
             <div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <TextField 
             style = {InputStyle}
@@ -109,9 +127,27 @@ class EmissionForm extends React.Component {
             id="standard-required"
             label="Name"
             placeholder="Please Enter your name..."
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircleRoundedIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={(e) => this.handleSelectChange(e, "name")}
             />
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <FormControl>
             <Select
@@ -128,6 +164,17 @@ class EmissionForm extends React.Component {
             <FormHelperText style={{margin: "auto"}}>Are you filling this information for yourself or a Company?</FormHelperText>
             </FormControl>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <FormControl>
             <Select
@@ -144,24 +191,17 @@ class EmissionForm extends React.Component {
             <FormHelperText style={{margin: "auto"}}>What is your primary fuel type?</FormHelperText>
             </FormControl>
             </div>
-            <div style={PaperStyle}>
-            <TextField
-            style = {InputStyle}
-            required
-            id="standard-required"
-            label="Heat (in Cubic/Ft)"
-            placeholder="Please Provide Amount of Heat Consumed" 
-            onChange={(e) => this.handleSelectChange(e, "heat")}/>
-            </div>
-            <div style={PaperStyle}>
-            <TextField
-            style = {InputStyle}
-            required
-            id="standard-required"
-            label="Electricity (in KWH)"
-            placeholder="Please Provide Amount of Electricity used in KWH" 
-            onChange={(e) => this.handleSelectChange(e, "electricity")}/>
-            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <FormControl>
             <Select
@@ -179,15 +219,72 @@ class EmissionForm extends React.Component {
             Deasel or Gas?</FormHelperText>
             </FormControl>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <TextField
             style = {InputStyle}
             required
             id="standard-required"
-            label="Vehicle Travel (Miles/Year)"
-            placeholder="Please Provide Amount of Miles Traveled" 
-            onChange={(e) => this.handleSelectChange(e, "vehicle")}/>
+            label="Electricity (in KWH)"
+            placeholder="Please Provide Amount of Electricity used in KWH" 
+            onChange={(e) => this.handleSelectChange(e, "electricity")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PowerRoundedIcon />
+                </InputAdornment>
+              ),
+            }}
+            />
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style={PaperStyle}>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Heat (in Cubic/Ft)"
+            placeholder="Please Provide Amount of Heat Consumed"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <WhatshotRoundedIcon />
+                </InputAdornment>
+              ),
+            }}
+            onChange={(e) => this.handleSelectChange(e, "heat")}/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <TextField
             style = {InputStyle}
@@ -195,8 +292,53 @@ class EmissionForm extends React.Component {
             id="standard-required"
             label="Air Travel (Miles/Year)"
             placeholder="Please Provide Amount of Miles Traveled" 
-            onChange={(e) => this.handleSelectChange(e, "air")}/>
+            onChange={(e) => this.handleSelectChange(e, "air")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FlightTakeoffRoundedIcon/>
+                </InputAdornment>
+              ),
+            }}/>
             </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style={PaperStyle}>
+            <TextField
+            style = {InputStyle}
+            required
+            id="standard-required"
+            label="Vehicle Travel (Miles/Year)"
+            placeholder="Please Provide Amount of Miles Traveled" 
+            onChange={(e) => this.handleSelectChange(e, "vehicle")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LocalShippingRoundedIcon />
+                </InputAdornment>
+              ),
+            }}/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div style={PaperStyle}>
             <TextField
             style = {InputStyle}
@@ -204,10 +346,35 @@ class EmissionForm extends React.Component {
             id="standard-required"
             label="Rail Travel (Miles/Year)"
             placeholder="Please Provide Amount of Miles Traveled" 
-            onChange={(e) => this.handleSelectChange(e, "rail")}/>
+            onChange={(e) => this.handleSelectChange(e, "rail")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <TrainRoundedIcon />
+                </InputAdornment>
+              ),
+            }}/>
             </div>
-            <Button 
-            size="large"
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Button
+                variant="contained"
+                style={{
+                    backgroundColor: "#7c5e42",
+                    color: "#ffffff",
+                    width: "20%"
+                    }}
+                size="large"
+                startIcon={<ArrowForwardRoundedIcon />}
             onClick={(e) => this.handleSubmit(e)}>
             Submit
             </Button>
