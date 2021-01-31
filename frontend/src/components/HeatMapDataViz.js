@@ -1,3 +1,4 @@
+  
 import React from "react";
 import DeckGL from "@deck.gl/react";
 import { LineLayer } from "@deck.gl/layers";
@@ -5,6 +6,7 @@ import { StaticMap } from "react-map-gl";
 import {HeatmapLayer} from '@deck.gl/aggregation-layers';
 import {  Button, Dropdown } from "semantic-ui-react";
 import './BubbleDataViz.css';
+import {Link} from 'react-router-dom';
 
 
 import axios from "react";
@@ -13,29 +15,6 @@ import {MapView, FirstPersonView} from '@deck.gl/core';
 import plant from '../assets/power-plant.png';
 import cloud from '../assets/cloud.png';
 import BarChart from 'react-apexcharts';
-
-const chartOptions = [
-  {
-    key: "Bubble Chart",
-    text: "Bubble Chart",
-    value: "Bubble Chart"
-  },
-  {
-    key: "Heatmap",
-    text: "Heatmap",
-    value: "Heatmap"
-  }
-];
-
-const divStyle = {
-  backgroundColor: "#fff",
-  fontColor: "#081C15",
-  width: "5%",
-  marginLeft: '95%',
-  marginTop: '2%',
-  padding: "20px 10px 20px 10px"
-};
-
 
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoibHVrZXBlcnJ5NDciLCJhIjoiY2tra2E5bXdkMThiNjMxb2R3ZXd2MjVzeiJ9.ANk2BfLUiL-fBvB7zbm5hA";
@@ -83,6 +62,10 @@ class HeatMapDataViz extends React.Component {
       return (
           <div className="DataViz" style={{height: "100vh", background: "linear-gradient(black, #1545C0)", backgroundSize: 'cover', overflow: 'hidden', maxWidth: '100%' }}>
 
+                <Link to="/bubble">
+                    <Button style ={{marginTop: "3%", background: 'white', zIndex:9, position: "absolute", marginLeft:"91%",}}>Back to Bubble Chart</Button>
+                </Link>
+
               <DeckGL
                 initialViewState={INITIAL_VIEW_STATE}
                 controller={true}
@@ -100,17 +83,7 @@ class HeatMapDataViz extends React.Component {
                   <img src={cloud} style={{ position: 'absolute', marginLeft: "35%", marginTop: "-5%", width: "15%"  }} />
                   <img src={cloud} style={{ position: 'absolute', marginLeft: "15%", marginTop: "0%", width: "12%" }} />
                   <img src={cloud} style={{ position: 'absolute', marginLeft: "30%", marginTop: "8%", width: "10%" }} />
-
               </div> */}
-          
-                <Dropdown
-                    inline
-                    style={divStyle}
-                    placeholder="View Data"
-                    fluid
-                    selection
-                    options={chartOptions}
-                ></Dropdown>
 
               <div>
                   <img src={plant} style={{ position: 'absolute', marginLeft: "-50%", marginTop: "38.5%", width: "10%" }} />
