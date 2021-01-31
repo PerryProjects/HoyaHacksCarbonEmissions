@@ -388,6 +388,4 @@ class EmissionForm extends React.Component {
   }
 }
 
-const withHistoryEmissionForm = withRouter(EmissionForm)
-
-export default EmissionForm;
+export default withRouter(EmissionForm);
