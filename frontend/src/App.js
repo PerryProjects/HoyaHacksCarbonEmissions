@@ -10,6 +10,7 @@ import moon from './assets/moon.png';
 import star from './assets/star.png';
 import dino from './assets/dinosaur-skull.png';
 import fish from './assets/fish-bone.png';
+import humanSkull from './assets/skull.png';
 import BubbleDataViz from './components/BubbleDataViz.js';
 import EmissionForm from './views/EmissionForm.js';
 import {
@@ -19,9 +20,7 @@ import {
   Link,
   useHistory
 } from "react-router-dom"
-
-import humanSkull from './assets/skull.png';
-import HeatMap from './components/HeatMapDataViz';
+import HeatMapDataViz from './components/HeatMapDataViz';
 import BubbleViz from './components/BubbleDataViz';
 
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
@@ -116,6 +115,9 @@ function App() {
 
         <Route path="/bubble">
           <BubbleDataViz/>
+        </Route>
+        <Route path="/heatMap">
+          <HeatMapDataViz/>
         </Route>
 
       </Switch>
