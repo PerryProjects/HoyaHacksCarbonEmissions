@@ -1,5 +1,5 @@
 import React from "react";
-import {  Dropdown } from "semantic-ui-react";
+import {  Button, Segment, Dropdown } from "semantic-ui-react";
 import plant from '../assets/power-plant.png';
 import cloud from '../assets/cloud.png';
 import BubbleChart from 'react-apexcharts';
@@ -19,11 +19,11 @@ const chartOptions = [
   ];
   
 const divStyle = {
-    backgroundColor: "#A9A9A9",
+    backgroundColor: "#fff",
     fontColor: "#081C15",
     width: "5%",
     marginLeft: '95%',
-    marginTop: '6.5%',
+    marginTop: '7.1%',
     padding: "20px 10px 20px 10px"
 };
 
@@ -44,13 +44,17 @@ function generateData(baseval, count, yrange) {
       i++;
     }
     return series;
-  }
+}
+
+const data = []
+var total_e = ''
 
 class BubbleDataViz extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            total_all_emissions: '',
             options: {
                 chart: {
                     type: 'bubble',
@@ -129,6 +133,27 @@ class BubbleDataViz extends React.Component {
         }
     }
 
+    
+
+    componentDidMount() {
+        fetch('http://localhost:8000/emissions/')
+        .then(response => response.json())
+        .then(content => {
+            total_e = content.total_all_emissions
+            content.list_emission_entries.map((entry) => {
+                const obj = {};
+                console.log(entry);
+                obj['NAME'] = entry.name;
+                obj['WEIGHT'] = entry.emissions_total;      //personal total
+                obj['TIME'] = entry.time;
+                obj['Y_PERC_TOTAL'] = (entry.emissions_total / content.total_all_emissions) * 100;
+                data.push(obj);
+            })
+        })
+    }
+
+
+
     render() {
         
         return (
@@ -156,12 +181,13 @@ class BubbleDataViz extends React.Component {
                 <BubbleChart options={this.state.options} series={this.state.series} type="bubble" height = {900} width = {window.innerWidth} style={{ marginTop: '0%'}}/>
 
                 <div>
-                    <button style={{height: '80px', width: '40%', borderRadius: 20, boxShadow: "1px 3px 10px white"}}>Exit</button >
+                    {/* <Button style={{height: '80px', width: '40%', borderRadius: 20, boxShadow: "1px 3px 10px white"}}>Exit</Button > */}
+                    <Button attached style={{ height: '80px', width: '30%', fontSize: '30px', borderRadius: 20, display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>Exit</Button >
                 </div>
 
 
                 <div>
-                    <img src={plant} style={{ position: 'absolute', marginLeft: "-50%", marginTop: "-5.5%", width: "10%" }} />
+                    <img src={plant} style={{ position: 'absolute', marginLeft: "-50%", marginTop: "-6%", width: "10%" }} />
                 </div>
             </div>
         );
