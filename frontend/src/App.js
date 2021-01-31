@@ -8,7 +8,6 @@ import tree from './assets/tree.png';
 import sprout from './assets/sprout.png';
 import moon from './assets/moon.png';
 import star from './assets/star.png';
-import EmissionForm from './views/EmissionForm.js';
 import BubbleDataViz from './components/BubbleDataViz.js';
 import {
   BrowserRouter as Router,
@@ -18,6 +17,9 @@ import {
   useHistory
 } from "react-router-dom"
 
+import humanSkull from './assets/skull.png';
+import HeatMap from './components/HeatMapDataViz';
+import BubbleViz from './components/BubbleDataViz';
 
 const url = (name, wrap = false) => `${wrap ? 'url(' : ''}https://awv3node-homepage.surge.sh/build/assets/${name}.svg${wrap ? ')' : ''}`
 
