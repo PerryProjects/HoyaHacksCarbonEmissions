@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Image, Segment, Container } from "semantic-ui-react";
+import { Grid, Segment } from "semantic-ui-react";
 import Font, { Text } from "react-font";
 
 const titleStyle = {
