@@ -25,7 +25,10 @@ We are planning to add more data visualization, suggest users ways to reach carb
 ![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
 
 ## Image of Web Form
-![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
+![Image of Thermal](https://i.imgur.com/ZqParja.png)
+
+## Image of Web Form
+![Image of Thermal](https://i.imgur.com/3Y5AGkB.png)
 
 ## Image of Bubble Graph
-![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
+![Image of Thermal](https://i.imgur.com/0ULICus.png)
