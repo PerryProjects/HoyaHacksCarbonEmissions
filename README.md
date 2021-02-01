@@ -20,3 +20,12 @@ We all had our specializations such as frontend, backend, and infrastructure. We
 
 ## What's next for Carbon Emissions Calculator
 We are planning to add more data visualization, suggest users ways to reach carbon net zero, and write a web scraper to gather online data about companies. We hope to show users more about how their emissions compare not just to our website's visitors, but also corporations or countries.
+
+## Image of Heat Map from User Data
+![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
+
+## Image of Web Form
+![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
+
+## Image of Bubble Graph
+![Image of Thermal](https://i.imgur.com/jnGtxdI.png)
